@@ -25,7 +25,7 @@ public class CreateCategory
         var categories = await dbConnection.QueryAsync<(int category_id, string category_name)>(
             "SELECT category_id, category_name from categories where category_name = @Category_name",
             new { Category_name = categoryName });
-        if (categories == null)
+        if (categories != null)
         {
             await dbConnection.ExecuteScalarAsync<int>(
                 "INSERT INTO categories (category_name) values (@Category_name) ", new { Category_name = categoryName });
